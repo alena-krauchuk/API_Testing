@@ -16,6 +16,7 @@ class TestCreateUsers:
         print(response.status_code)
         print(response.url)  # мое
 
+    # мой HW-тест 1
     def test_get_user_first_name(self):
         response = MyRequests.post(url="/users/", data=self.body)
         print(response.json()["first_name"])
