@@ -30,4 +30,11 @@ class TestCreateUsers:
         # assert response.json()["first_name"] == "Jim"
         assert response.json()["first_name"] == self.body["first_name"]
 
+    # мой HW-тест 3
+    def test_get_user_last_name(self):
+        response = MyRequests.post(url="/users/", data=self.body)
+        print(response.json()["last_name"])
+        assert response.json()["last_name"] == "Furry"
+        # assert response.json()["last_name"] == self.body["last_name"]
+
 
