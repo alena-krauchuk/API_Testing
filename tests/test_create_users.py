@@ -22,7 +22,6 @@ class TestCreateUsers:
         print(response.url)
         assert response.url == "https://send-request.me/api/users/"
 
-
     # мой HW-тест 2
     def test_get_user_first_name(self):
         response = MyRequests.post(url="/users/", data=self.body)
@@ -37,4 +36,9 @@ class TestCreateUsers:
         assert response.json()["last_name"] == "Furry"
         # assert response.json()["last_name"] == self.body["last_name"]
 
-
+    # мой HW-тест 4
+    def test_get_user_company_id(self):
+        response = MyRequests.post(url="/users/", data=self.body)
+        print(response.json()["company_id"])
+        # assert response.json()["company_id"] == 1
+        assert response.json()["company_id"] == self.body["company_id"]
