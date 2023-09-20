@@ -27,20 +27,21 @@ class TestUpdateUsers:
     def test_check_new_first_name_of_user(self):
         response = MyRequests.put(url="/users/22473", data=self.body)
         print(response.json()["first_name"])
-        assert response.json()["first_name"] != "Jim", "First name is incorrect"
-        # assert response.json()["first_name"] == self.body["first_name"], "First name is incorrect"
+        assert response.json()["first_name"] != "Jim", "First name was not updated"
+        # assert response.json()["first_name"] == self.body["first_name"], "First name was not updated"
 
     # мой HW-тест 8
     # Проверить, что новая фамилия не равна предыдущей
     def test_check_new_last_name_of_user(self):
         response = MyRequests.put(url="/users/22473", data=self.body)
         print(response.json()["last_name"])
-        # assert response.json()["last_name"] != "Jim", "Last name is incorrect"
-        assert response.json()["last_name"] == self.body["last_name"], "Last name is incorrect"
+        # assert response.json()["last_name"] != "Jim", "Last name was not updated"
+        assert response.json()["last_name"] == self.body["last_name"], "Last name was not updated"
 
     # мой HW-тест 9
     # Проверить статус-код апдейта
-    def test_get_status_code_201(self):
-        response = MyRequests.post(url="/users/22473", data=self.body)
+    def test_get_status_code_200(self):
+        response = MyRequests.put(url="/users/22474", data=self.body)
+        print(response.json())
         print(response.status_code)
-        # assert response.status_code == 201, f"Status code isn't 201, status code is {response.status_code}"
+        # assert response.status_code == 200, f"Status code isn't 200, status code is {response.status_code}"
