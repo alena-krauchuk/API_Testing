@@ -2,9 +2,10 @@ from src.my_requests import MyRequests
 from generator.generator import generated_person
 from src.assertions import Assertion
 from data.status_code import StatusCode
+from src.base_page import BasePage
 
 
-class TestCreateUsers:
+class TestCreateUsers(BasePage):
     assertion = Assertion()
     status_code = StatusCode()
 
@@ -31,13 +32,14 @@ class TestCreateUsers:
     #     }
     #     return body
 
-    def get_body(self, first_name, last_name, company_id):
-        body = {
-            "first_name": first_name,
-            "last_name": last_name,
-            "company_id": company_id
-        }
-        return body
+    # работало, но переносим def get_body() в base_page.py из папки src
+    # def get_body(self, first_name, last_name, company_id):
+    #     body = {
+    #         "first_name": first_name,
+    #         "last_name": last_name,
+    #         "company_id": company_id
+    #     }
+    #     return body
 
     def test_create_user(self):
         person_info = next(generated_person())
