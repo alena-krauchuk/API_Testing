@@ -1,20 +1,12 @@
 from src.my_requests import MyRequests
-from generator.generator import generated_person
 
 
 class TestCreateUsers:
-
-    def create_user(self):
-        person_info = next(generated_person())
-        first_name = person_info.first_name
-        last_name = person_info.last_name
-        company_id = person_info.company_id
-        body = {
-            "first_name": first_name,
-            "last_name": last_name,
-            "company_id": company_id
-        }
-        return body
+    body = {
+        "first_name": "Jim",
+        "last_name": "Furry",
+        "company_id": 1
+    }
 
     def test_create_user(self):
         print(self.body.get("first_name"))
