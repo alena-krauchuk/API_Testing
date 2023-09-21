@@ -1,10 +1,12 @@
 from src.my_requests import MyRequests
 from generator.generator import generated_person
 from src.assertions import Assertion
+from data.status_code import StatusCode
 
 
 class TestCreateUsers:
     assertion = Assertion()
+    status_code = StatusCode()
 
     # работает, но разбиваем надвое - def create_user(self) и def get_body(self, first_name, last_name, company_id)
     # позже осталось только def get_body, а генератор перенесли в def test_create_user(self)
@@ -54,7 +56,8 @@ class TestCreateUsers:
         company_id = person_info.company_id
         response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
         # assert response.status_code == 201, f"Status code isn't 201, status code is {response.status_code}" # меняем
-        self.assertion.assert_status_code(response, expected_status_code=201)
+        # self.assertion.assert_status_code(response, expected_status_code=201) # меняем на импорт status_code
+        self.assertion.assert_status_code(response, self.status_code.CREATE)
 
     # ______________________________________________________________________________________
     # мой HW-тест 1 - теперь не работает
