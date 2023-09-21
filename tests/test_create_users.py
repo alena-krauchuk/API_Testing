@@ -1,15 +1,27 @@
 from src.my_requests import MyRequests
 from generator.generator import generated_person
+from src.assertions import Assertion
 
 
 class TestCreateUsers:
+    assertion = Assertion()
 
     # работает, но разбиваем надвое - def create_user(self) и def get_body(self, first_name, last_name, company_id)
+    # позже осталось только def get_body, а генератор перенесли в def test_create_user(self)
     # def create_user_01(self):
     #     person_info = next(generated_person())
     #     first_name = person_info.first_name
     #     last_name = person_info.last_name
     #     company_id = person_info.company_id
+    #     body = {
+    #         "first_name": first_name,
+    #         "last_name": last_name,
+    #         "company_id": company_id
+    #     }
+    #     return body
+
+    # работало и так, но после создания файла assertions.py переделали в след.ред.
+    # def get_body(self, first_name, last_name, company_id):
     #     body = {
     #         "first_name": first_name,
     #         "last_name": last_name,
@@ -32,7 +44,6 @@ class TestCreateUsers:
         company_id = person_info.company_id
         response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
         body = response.json()
-        print(body)
         assert body["first_name"] == first_name, "First name was not created"
         assert body["last_name"] == last_name, "Last name was not created"
 
@@ -42,7 +53,8 @@ class TestCreateUsers:
         last_name = person_info.last_name
         company_id = person_info.company_id
         response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
-        assert response.status_code == 201, f"Status code isn't 201, status code is {response.status_code}"
+        # assert response.status_code == 201, f"Status code isn't 201, status code is {response.status_code}" # меняем
+        self.assertion.assert_status_code(response, expected_status_code=201)
 
     # ______________________________________________________________________________________
     # мой HW-тест 1 - теперь не работает
