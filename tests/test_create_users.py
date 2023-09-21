@@ -45,6 +45,7 @@ class TestCreateUsers:
         last_name = person_info.last_name
         company_id = person_info.company_id
         response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
+        print(response.json())
         body = response.json()
         assert body["first_name"] == first_name, "First name was not created"
         assert body["last_name"] == last_name, "Last name was not created"

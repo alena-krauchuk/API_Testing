@@ -1,7 +1,12 @@
+from src.assertions import Assertion
 from src.my_requests import MyRequests
+from data.status_code import StatusCode
 
 
 class TestUpdateUsers:
+    assertion = Assertion()
+    status_code = StatusCode
+
     body = {
         "first_name": "July",
         "last_name": "Brando",
@@ -9,8 +14,9 @@ class TestUpdateUsers:
     }
 
     def test_update_user(self):
-        response = MyRequests.put(url="/users/22473", data=self.body)
+        response = MyRequests.put(url="/users/22649", data=self.body)
         print(response.json())
+        self.assertion.assert_status_code(response, self.status_code.OK)  # новый ассерт в связи с импортом ассертов
 
     # Можно сделать проверки id, статус-код при апдейте, имя новое с именем прежним, то же с фамилией и id компании
 
