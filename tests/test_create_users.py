@@ -48,9 +48,13 @@ class TestCreateUsers(BasePage):
         company_id = person_info.company_id
         response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
         print(response.json())
-        body = response.json()
-        assert body["first_name"] == first_name, "First name was not created"
-        assert body["last_name"] == last_name, "Last name was not created"
+        # body = response.json()                                                                # с assertion не нужно
+        # assert body["first_name"] == first_name, "First name was not created"                 # меняем на assertion
+        self.assertion.assert_first_name(response, first_name), "First name was not created"
+        # assert body["last_name"] == last_name, "Last name was not created"                    # меняем на assertion
+        self.assertion.assert_last_name(response, last_name), "Last name was not created"
+
+
 
     def test_get_status_code_201(self):
         person_info = next(generated_person())
