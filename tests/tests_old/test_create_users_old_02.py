@@ -8,13 +8,38 @@ from src.base_page import BasePage
 class TestCreateUsers(BasePage):
     assertion = Assertion()
     status_code = StatusCode()
-    keys = KeysCreateUser()
 
+    # работает, но разбиваем надвое - def create_user(self) и def get_body(self, first_name, last_name, company_id)
+    # позже осталось только def get_body, а генератор перенесли в def test_create_user(self)
+    # def create_user_01(self):
+    #     person_info = next(generated_person())
+    #     first_name = person_info.first_name
+    #     last_name = person_info.last_name
+    #     company_id = person_info.company_id
+    #     body = {
+    #         "first_name": first_name,
+    #         "last_name": last_name,
+    #         "company_id": company_id
+    #     }
+    #     return body
 
-    def test_get_status_code_201(self, prepare_user_in_active_company):
-        post_method = CreateUser()
-        response = post_method.get_user(prepare_user_in_active_company)
-        self.assertion.assert_status_code(response, self.status_code.CREATE)
+    # работало и так, но после создания файла assertions.py переделали в след.ред.
+    # def get_body(self, first_name, last_name, company_id):
+    #     body = {
+    #         "first_name": first_name,
+    #         "last_name": last_name,
+    #         "company_id": company_id
+    #     }
+    #     return body
+
+    # работало, но переносим def get_body() в base_page.py из папки src
+    # def get_body(self, first_name, last_name, company_id):
+    #     body = {
+    #         "first_name": first_name,
+    #         "last_name": last_name,
+    #         "company_id": company_id
+    #     }
+    #     return body
 
     def test_create_user(self):
         person_info = next(generated_person())
@@ -23,9 +48,23 @@ class TestCreateUsers(BasePage):
         company_id = person_info.company_id
         response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
         print(response.json())
+        # body = response.json()                                                                # с assertion не нужно
+        # assert body["first_name"] == first_name, "First name was not created"                 # меняем на assertion
         self.assertion.assert_first_name(response, first_name), "First name was not created"
+        # assert body["last_name"] == last_name, "Last name was not created"                    # меняем на assertion
         self.assertion.assert_last_name(response, last_name), "Last name was not created"
 
+
+
+    def test_get_status_code_201(self):
+        person_info = next(generated_person())
+        first_name = person_info.first_name
+        last_name = person_info.last_name
+        company_id = person_info.company_id
+        response = MyRequests.post(url="/users/", data=self.get_body(first_name, last_name, company_id))
+        # assert response.status_code == 201, f"Status code isn't 201, status code is {response.status_code}" # меняем
+        # self.assertion.assert_status_code(response, expected_status_code=201) # меняем на импорт status_code
+        self.assertion.assert_status_code(response, self.status_code.CREATE)
 
     # ______________________________________________________________________________________
     # мой HW-тест 1 - теперь не работает
