@@ -53,6 +53,7 @@ def get_absolute_path():
     root_directory = os.path.dirname(os.path.abspath(__file__))
     return root_directory
 
+
 @pytest.fixture()
 def make_user(prepare_user_in_active_company):
     post_method = CreateUser()
