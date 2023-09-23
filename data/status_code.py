@@ -7,4 +7,4 @@ class StatusCode:
     BAD_REQUEST = 400
     NOT_FOUND = 404
     ACTUAL = 202
-    UNPROCESSABLE_CONTENT = 422
+    Unprocessable_Content = 422

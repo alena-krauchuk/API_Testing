@@ -24,4 +24,3 @@ class TestUpdateUsers:
         put_method = UpdateUser()
         response, first_name = put_method.update_first_name(make_user)
         assert response.json()["first_name"] != first_name
-

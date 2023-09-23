@@ -7,7 +7,6 @@ faker_eng = Faker("En")
 Faker.seed()
 
 
-# создаем генератор
 def generated_person():
     yield Person(
         first_name=faker_eng.first_name(),
