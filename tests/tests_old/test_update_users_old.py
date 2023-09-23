@@ -1,8 +1,6 @@
 from src.assertions import Assertion
-from src.create_user import CreateUser
 from src.my_requests import MyRequests
 from data.status_code import StatusCode
-from src.update_user import UpdateUser
 
 
 class TestUpdateUsers:
@@ -20,14 +18,8 @@ class TestUpdateUsers:
         print(response.json())
         self.assertion.assert_status_code(response, self.status_code.OK)  # новый ассерт в связи с импортом ассертов
 
-    def test_update_first_name(self, make_user):
-        put_method = UpdateUser()
-        response, first_name = put_method.update_first_name(make_user)
-        assert response.json()["first_name"] != first_name
-
     # Можно сделать проверки id, статус-код при апдейте, имя новое с именем прежним, то же с фамилией и id компании
 
-    # удалить все это отсюда
     # __________________________________________________________________________________________________
     # мой HW-тест 6
     # Проверить, что id пользователя остался прежним

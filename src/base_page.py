@@ -7,6 +7,7 @@ class BasePage:
 
     def get_user(self, body):
         response = MyRequests.post(self.url.create_user, body)
+        print(response.json())
         return response
 
     def prepare_creating_data(self, first_name=None, last_name=None, company_id=None):
