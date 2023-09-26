@@ -24,3 +24,19 @@ class TestUpdateUsers:
         put_method = UpdateUser()
         response, first_name = put_method.update_first_name(make_user)
         assert response.json()["first_name"] != first_name
+
+    def test_update_first_name_01(self, prepare_user_in_active_company):
+        post_method = CreateUser()
+        response = post_method.get_user(prepare_user_in_active_company)
+        put_method = UpdateUser()
+        put_method.update_first_name(response)
+        # assert response.json()["first_name"] != first_name
+
+
+
+
+
+
+
+
+
